@@ -1,0 +1,8 @@
+# gdfidl
+mkdir -pv /nsls2/software/ap/gdfidl/build/
+mkdir -pv /nsls2/software/ap/gdfidl/Linux-x86_64
+cd /nsls2/software/ap/gdfidl/build/
+wget http://www.gdfidl.de/gd1-200723-mpich.tar.bz2
+cd /nsls2/software/ap/gdfidl/Linux-x86_64
+cat /nsls2/software/ap/gdfidl/build/gd1-200723-mpich.tar.bz2 | bunzip2 | tar -xvf -
+# Copy Scripts directory, Complex-Roots, stp2stl from old cluster...
