@@ -8,7 +8,7 @@ git clone https://github.com/MentorEmbedded/nvptx-tools
 git clone https://github.com/MentorEmbedded/nvptx-newlib
 
 # This MUST be done on GPU node or where cuda libs are installed
-srun -p long -t 999 --gres=gpu --pty bash
+srun -p long -t 999 --exclusive --gres=gpu --pty bash
 module load gcc/9.3.0
 cd /nsls2/software/ap/gcc/build/gcc-9.3.0-offload
 cuda=/usr/local/cuda
