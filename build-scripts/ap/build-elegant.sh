@@ -59,6 +59,8 @@ cd ../src/SDDS/tiff
 make
 cd ../png
 make
+cd ../python
+PYTHON3=1 make
 cd ..
 make
 
