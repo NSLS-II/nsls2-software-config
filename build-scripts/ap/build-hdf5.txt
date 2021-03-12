@@ -1,4 +1,7 @@
 # hdf5
+
+# This build includes both parallel and java with an override (lookout!)
+
 module load gcc/9.3.0 python/3.9.1 mpich/3.3.2-gcc-9.3.0
 mkdir -pv /nsls2/software/ap/hdf5/build
 cd /nsls2/software/ap/hdf5/build
@@ -6,7 +9,8 @@ cd /nsls2/software/ap/hdf5/build
 # scp Downloads/hdf5-1.12.0.tar.gz dhidas@submit1:/nsls2/software/ap/hdf5/build
 tar zxf hdf5-1.12.0.tar.gz
 cd hdf5-1.12.0
-CC=`which mpicc` ./configure --enable-parallel --prefix=/nsls2/software/ap/hdf5/1.12.0
+CC=`which mpicc` ./configure --enable-parallel --prefix=/nsls2/software/ap/hdf5/1.12.0 --enable-java --enable-unsupported
+
 make -j > m.o
 make install
 
