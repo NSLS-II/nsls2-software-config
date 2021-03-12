@@ -24,4 +24,6 @@ cd /nsls2/software/ap/hdf5view/build
 wget https://support.hdfgroup.org/ftp/HDF5/releases/HDF-JAVA/hdfview-3.1.2/bin/HDFViewApp-3.1.2-centos7_64.tar.gz
 tar zxf HDFViewApp-3.1.2-centos7_64.tar.gz
 mv HDFView ../3.1.2
+cd ../3.1.2/bin
+ln -s HDFView hdfview # for yoshi
 
