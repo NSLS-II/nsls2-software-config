@@ -19,4 +19,4 @@ cd /nsls2/software/ap/python/$ver/bin
 ln -s python3 python
 ln -s pip3 pip
 yes | LD_LIBRARY_PATH=/nsls2/software/ap/python/$ver/lib ./pip install pip -U
-yes | LD_LIBRARY_PATH=/nsls2/software/ap/python/$ver/lib ./pip install wheel numpy scipy matplotlib mpi4py Cython
+yes | LD_LIBRARY_PATH=/nsls2/software/ap/python/$ver/lib ./pip install wheel numpy scipy matplotlib mpi4py Cython ninja meson

@@ -13,4 +13,8 @@ cd ncurses-6.2
 ./configure --prefix=/nsls2/software/ap/ncurses/6.2 --with-shared --enable-widec --with-termlib
 make -j > m.o
 make install
+make clean
+./configure --prefix=/nsls2/software/ap/ncurses/6.2
+make
+make install
 
