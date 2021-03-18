@@ -2,7 +2,7 @@
 
 # Might be useful: https://www3.aps.anl.gov/forums/elegant/viewtopic.php?t=891
 
-module load gcc/9.3.0 mpich/3.3.2-gcc-9.3.0 python/3.9.1 motif/2.3.8
+module load accelerator/path gcc/9.3.0 mpich/3.3.2-gcc-9.3.0 python/3.9.1 motif/2.3.8 tcltk/8.6.11
 
 export EV=2020.5.0
 export EBASE=/nsls2/software/ap/elegant/$EV-gcc-9.3.0-mpich-3.3.2
@@ -23,6 +23,7 @@ wget http://www.netlib.org/blas/blas-3.8.0.tgz # http://www.netlib.org/blas/
 wget https://ops.aps.anl.gov/downloads/oag.1.26.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 wget https://ops.aps.anl.gov/downloads/defns.rpn # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 
+echo "done wget"
 
 # Make dest dir
 mkdir -pv $EBASE/epics
@@ -59,10 +60,13 @@ cd ../src/SDDS/tiff
 make
 cd ../png
 make
-cd ../python
-PYTHON3=1 make
 cd ..
 make
+cd python
+PYTHON3=1 make
+cd ..
+
+echo "done SDDS"
 
 # OAG
 cd $EBASE
@@ -77,6 +81,7 @@ cd lapack-3.9.0/
 cp make.inc.example make.inc
 make
 cp liblapack.a  librefblas.a  libtmglib.a ../epics/extensions/lib/linux-x86_64/
+echo "done LAPACK"
 
 # BLAS
 cd $EBASE
@@ -84,6 +89,7 @@ tar zxf $EBUILD/blas-3.8.0.tgz
 cd BLAS-3.8.0/
 make
 cp blas_LINUX.a ../epics/extensions/lib/linux-x86_64/libblas.a
+echo "done BLAS"
 
 # OAG Apps
 cd $EBASE/oag/apps/configure
@@ -92,6 +98,7 @@ cd ../src/physics/
 make
 cd ../xraylib/
 make
+echo "done OAG Apps"
 
 # Elegant
 cd $EBASE/oag/apps/src/elegant
@@ -99,6 +106,7 @@ export PATH=$PATH:$EBASE/epics/extensions/bin/linux-x86_64
 make
 cd elegantTools
 make
+echo "done elegant"
 
 # Pelegant
 cd $EBASE/epics/extensions/src/SDDS/SDDSlib
@@ -110,6 +118,7 @@ make
 cd $EBASE/oag/apps/src/elegant
 make clean
 make Pelegant
+echo "done Pelegant"
 
 # OAG Tcl/Tk
 cd $EBASE
@@ -119,20 +128,24 @@ make
 cd ../pem
 make
 cd ../tcltkinterp/extensions
+sed -i -n '/ifeq (\$(EPICS_HOST_ARCH),linux-x86_64)/{:a;N;/endif\nendif/!ba;N;s/.*\n/##REPLACEMENT\nifeq (\$(EPICS_HOST_ARCH),linux-x86_64)\nOAGTCL =\$(notdir \$(wildcard \$(TCL_INCLUDE)\/tcl.h))\nTCL_INC = \$(TCL_INCLUDE)\nTCL_LIB = \$(TCL_LIBRARY)\nendif\n/};p' ca/Makefile
+sed -i -n '/ifeq (\$(EPICS_HOST_ARCH),linux-x86_64)/{:a;N;/endif\nendif/!ba;N;s/.*\n/##REPLACEMENT\nifeq (\$(EPICS_HOST_ARCH),linux-x86_64)\nOAGTCL =\$(notdir \$(wildcard \$(TCL_INCLUDE)\/tcl.h))\nTCL_INC = \$(TCL_INCLUDE)\nTCL_LIB = \$(TCL_LIBRARY)\nendif\n/};p' os/Makefile
+sed -i -n '/ifeq (\$(EPICS_HOST_ARCH),linux-x86_64)/{:a;N;/endif\nendif/!ba;N;s/.*\n/##REPLACEMENT\nifeq (\$(EPICS_HOST_ARCH),linux-x86_64)\nOAGTCL =\$(notdir \$(wildcard \$(TCL_INCLUDE)\/tcl.h))\nTCL_INC = \$(TCL_INCLUDE)\nTCL_LIB = \$(TCL_LIBRARY)\nendif\n/};p' rpn/Makefile
+sed -i -n '/ifeq (\$(EPICS_HOST_ARCH),linux-x86_64)/{:a;N;/endif\nendif/!ba;N;s/.*\n/##REPLACEMENT\nifeq (\$(EPICS_HOST_ARCH),linux-x86_64)\nOAGTCL =\$(notdir \$(wildcard \$(TCL_INCLUDE)\/tcl.h))\nTCL_INC = \$(TCL_INCLUDE)\nTCL_LIB = \$(TCL_LIBRARY)\nendif\n/};p' sdds/Makefile
 make
 ./installExtensions -location ../../../lib/linux-x86_64
+echo "done OAG Tcl/Tk"
 
 # Copy defns file to release area
 cp $EBUILD/defns.rpn $EBASE
 
 # Configure oag
 cd $EBASE/oag/apps/bin/linux-x86_64
-ln -s /usr/bin/tclsh oagtclsh
-ln -s /usr/bin/wish oagwish
+ln -s ${TCL_BIN}/tclsh oagtclsh
+ln -s ${TCL_BIN}/wish oagwish
 
 
-
-
+echo "done"
 # motif: Need to add to start of wmluitok.l
 # %option main
 # YACC="bison -y" ./configure --prefix=/asdasd
