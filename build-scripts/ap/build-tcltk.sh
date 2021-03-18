@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+# https://www.tcl.tk/software/tcltk/download.html
+
 # tcl because of elegant
 module load accelerator/path gcc/9.3.0
 mkdir -pv /nsls2/software/ap/tcltk/build
