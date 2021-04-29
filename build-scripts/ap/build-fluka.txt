@@ -5,4 +5,7 @@ mkdir -pv /nsls2/software/ap/fluka/build
 # scp Downloads/fluka-4-1.0.Linux-gfor9.tgz dhidas@submit1:/nsls2/software/ap/fluka/build
 cd /nsls2/software/ap/fluka/build
 tar zxf fluka-4-1.0.Linux-gfor9.tgz
+chmod go+rx 4-1.0/bin/*
+chmod g+w 4-1.0/bin/*
+chmod -R go+r 4-1.0/data/*
 mv fluka4-1.0 ../4-1.0
