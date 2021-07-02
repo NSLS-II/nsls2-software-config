@@ -1,4 +1,16 @@
-# gdfidl 210624
+
+# gdfidl 210701 (bad version)
+mkdir -pv /nsls2/software/ap/gdfidl/build/
+mkdir -pv /nsls2/software/ap/gdfidl/Linux-x86_64
+cd /nsls2/software/ap/gdfidl/build/
+wget http://www.gdfidl.de/gd1-210701-mpich.tar.bz2
+cd /nsls2/software/ap/gdfidl/Linux-x86_64
+cat /nsls2/software/ap/gdfidl/build/gd1-210701-mpich.tar.bz2 | bunzip2 | tar -xvf -
+chgrp -R nsls2software .
+
+
+
+# gdfidl 210624 (bad version)
 mkdir -pv /nsls2/software/ap/gdfidl/build/
 mkdir -pv /nsls2/software/ap/gdfidl/Linux-x86_64
 cd /nsls2/software/ap/gdfidl/build/
