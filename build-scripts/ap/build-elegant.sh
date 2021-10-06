@@ -5,7 +5,8 @@
 module load accelerator/path gcc/9.3.0 mpich/3.3.2-gcc-9.3.0 python/3.9.1 motif/2.3.8 tcltk/8.6.11
 
 #export EV=2020.5.0
-export EV=2021.2.0
+#export EV=2021.2.0
+export EV=2021.3.0
 export EBASE=/nsls2/software/ap/elegant/$EV-gcc-9.3.0-mpich-3.3.2
 export EBUILD=/nsls2/software/ap/elegant/build/$EV
 
