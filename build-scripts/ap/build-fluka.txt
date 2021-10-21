@@ -1,4 +1,20 @@
-# Fluka
+# Fluka 4-2.0
+# Download version locally and copy in from: https://fluka.cern/download/latest-fluka-release
+module purge
+module load accelerator/path gcc/9.3.0
+mkdir -pv /nsls2/software/ap/fluka/build
+# scp Downloads/fluka-4-2.0.x86-Linux-gfor9.tgz dhidas@submit1:/nsls2/software/ap/fluka/build
+cd /nsls2/software/ap/fluka/build
+tar zxf fluka-4-2.0.x86-Linux-gfor9.tgz
+chmod go+rx fluka4-2.0/bin/*
+chmod g+w fluka4-2.0/bin/*
+chmod -R go+r fluka4-2.0/data/*
+mv fluka4-2.0 ../4-2.0
+
+
+
+
+# Fluka 4-1.0
 # Download version locally and copy in from: https://fluka.cern/download/latest-fluka-release
 module load gcc/9.3.0
 mkdir -pv /nsls2/software/ap/fluka/build
