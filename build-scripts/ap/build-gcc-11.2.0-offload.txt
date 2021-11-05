@@ -1,0 +1,40 @@
+!! Follow the directions, this is not to be run as a shell script
+
+export ver=11.2.0
+
+module purge
+module load accelerator/path gcc/${ver}
+
+# gcc-${ver} with offloading.
+mkdir -pv /nsls2/software/ap/gcc/build/gcc-${ver}-offload
+cd /nsls2/software/ap/gcc/build/gcc-${ver}-offload
+git clone https://github.com/MentorEmbedded/nvptx-tools
+git clone https://github.com/MentorEmbedded/nvptx-newlib
+
+# This MUST be done on GPU node or where cuda libs are installed
+srun -p debug -q high -t 999 --exclusive --gres=gpu --pty bash
+cd /nsls2/software/ap/gcc/build/gcc-${ver}-offload
+cuda=/usr/local/cuda
+install_dir=/nsls2/software/ap/gcc/${ver}-offload
+cd /nsls2/software/ap/gcc/build/gcc-${ver}-offload
+cd nvptx-tools
+mkdir /tmp/${USER}
+./configure --with-cuda-driver-include=$cuda/include --with-cuda-driver-lib=$cuda/lib64 --prefix=$install_dir
+make -j > m.o
+make install
+cd ../../gcc-${ver}
+ln -s ../gcc-${ver}-offload/nvptx-newlib/newlib newlib
+target=$(./config.guess)
+cd ../gcc-${ver}-offload
+mkdir build-nvptx-gcc
+cd build-nvptx-gcc
+../../gcc-${ver}/configure --target=nvptx-none --with-build-time-tools=$install_dir/nvptx-none/bin --enable-as-accelerator-for=$target --disable-sjlj-exceptions --enable-newlib-io-long-long --enable-languages="c,c++,fortran,lto" --prefix=$install_dir
+make -j > m.o
+make install
+cd ..
+mkdir build-host-gcc
+cd build-host-gcc
+../../gcc-${ver}/configure --enable-offload-targets=nvptx-none --with-cuda-driver-include=$cuda/include --with-cuda-driver-lib=$cuda/lib64 --disable-bootstrap --disable-multilib --enable-languages="c,c++,fortran,lto" --prefix=$install_dir
+make -j > m.o
+make install
+exit
