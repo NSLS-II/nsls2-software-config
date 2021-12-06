@@ -5,8 +5,8 @@
 module purge
 module load accelerator/path gcc/9.3.0
 
-#NAME=ECHO3D_beta03
-NAME=ECHO3D_beta04
+NAME=ECHO3D_beta03
+#NAME=ECHO3D_beta04
 mkdir -pv /nsls2/software/ap/echo3d/build
 cd /nsls2/software/ap/echo3d/build
 wget https://www.desy.de/fel-beam/s2e/data/${NAME}.zip

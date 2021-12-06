@@ -2,11 +2,13 @@
 
 # Might be useful: https://www3.aps.anl.gov/forums/elegant/viewtopic.php?t=891
 
+module purge
 module load accelerator/path gcc/9.3.0 mpich/3.3.2-gcc-9.3.0 python/3.9.1 motif/2.3.8 tcltk/8.6.11
 
 #export EV=2020.5.0
 #export EV=2021.2.0
-export EV=2021.3.0
+#export EV=2021.3.0
+export EV=2021.4.0
 export EBASE=/nsls2/software/ap/elegant/$EV-gcc-9.3.0-mpich-3.3.2
 export EBUILD=/nsls2/software/ap/elegant/build/$EV
 
@@ -16,13 +18,13 @@ cd $EBUILD
 wget https://epics.anl.gov/download/base/baseR3.14.12.8.tar.gz # https://epics.anl.gov/download/base/index.php
 wget https://ops.aps.anl.gov/downloads/elegant.${EV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 wget https://epics.anl.gov/download/extensions/extensionsTop_20120904.tar.gz # https://epics.anl.gov/extensions/configure/index.php
-wget https://ops.aps.anl.gov/downloads/SDDS.5.0.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
+wget https://ops.aps.anl.gov/downloads/SDDS.5.1.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 wget https://ops.aps.anl.gov/downloads/oag.apps.configure.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
-wget https://ops.aps.anl.gov/downloads/SDDSepics.5.0.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
+wget https://ops.aps.anl.gov/downloads/SDDSepics.5.1.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 wget https://ops.aps.anl.gov/downloads/elegant.${EV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 wget https://github.com/Reference-LAPACK/lapack/archive/v3.9.0.tar.gz # http://www.netlib.org/lapack/
 wget http://www.netlib.org/blas/blas-3.8.0.tgz # http://www.netlib.org/blas/
-wget https://ops.aps.anl.gov/downloads/oag.1.26.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
+wget https://ops.aps.anl.gov/downloads/oag.1.27.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 wget https://ops.aps.anl.gov/downloads/defns.rpn # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 
 echo "done wget"
@@ -55,7 +57,7 @@ tar zxf $EBUILD/extensionsTop_20120904.tar.gz
 
 # Build SDDS
 cd $EBASE
-tar zxf $EBUILD/SDDS.5.0.tar.gz
+tar zxf $EBUILD/SDDS.5.1.tar.gz
 cd epics/extensions/configure
 make
 cd ../src/SDDS/tiff
@@ -73,7 +75,7 @@ echo "done SDDS"
 # OAG
 cd $EBASE
 tar zxf $EBUILD/oag.apps.configure.tar.gz
-tar zxf $EBUILD/SDDSepics.5.0.tar.gz
+tar zxf $EBUILD/SDDSepics.5.1.tar.gz
 tar zxf $EBUILD/elegant.${EV}.tar.gz
 
 # LAPACK
@@ -124,7 +126,7 @@ echo "done Pelegant"
 
 # OAG Tcl/Tk
 cd $EBASE
-tar zxf $EBUILD/oag.1.26.tar.gz
+tar zxf $EBUILD/oag.1.27.tar.gz
 cd oag/apps/src/tcltklib
 make
 cd ../pem
