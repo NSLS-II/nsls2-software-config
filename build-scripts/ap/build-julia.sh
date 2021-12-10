@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 basever=1.6
-ver=${basever}.3
+ver=${basever}.4
 
 # Julia
 mkdir -pv /nsls2/software/ap/julia/build

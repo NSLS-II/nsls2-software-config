@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
-ver=3.9.1
+#ver=3.9.1
+ver=3.6.15
 
 # Python $ver
 # Needs ncurses built correctly, a bit painful to figure out
