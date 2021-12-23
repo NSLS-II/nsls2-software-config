@@ -2,6 +2,8 @@
 
 ver=5.5.0
 
+module purge
+
 mkdir -pv /nsls2/software/ap/gcc/build/
 cd /nsls2/software/ap/gcc/build/
 wget http://mirrors.concertpass.com/gcc/releases/gcc-$ver/gcc-$ver.tar.gz
@@ -16,5 +18,5 @@ cd gcc-$ver-default
 make -j > m.o
 make install > i.o
 # setup modulefile in /nsls2/software/ap/modulefiles/gcc/$ver
-module load gcc/$ver
+module load accelerator/path gcc/${ver}
 gcc -march=native -Q --help=target|grep march # to check default arch
