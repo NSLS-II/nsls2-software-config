@@ -21,4 +21,4 @@ cd /nsls2/software/ap/python/$ver/bin
 ln -s python3 python
 ln -s pip3 pip
 yes | LD_LIBRARY_PATH=/nsls2/software/ap/python/$ver/lib ./pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org pip wheel setuptools --upgrade
-yes | LD_LIBRARY_PATH=/nsls2/software/ap/python/$ver/lib ./pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org numpy scipy matplotlib mpi4py Cython ipython jupyter ninja meson jupyterhub sudospawner
+yes | LD_LIBRARY_PATH=/nsls2/software/ap/python/$ver/lib ./pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org numpy scipy matplotlib mpi4py Cython ipython jupyter ninja meson jupyterhub sudospawner PyQt5 argos
