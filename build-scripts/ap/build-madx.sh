@@ -1,7 +1,7 @@
 #!/bin/bash -e 
 
 # madx
-ver=5.07.00
+ver=5.08.00
 mkdir -pv /nsls2/software/ap/madx/$ver/bin
 mkdir -pv /nsls2/software/ap/madx/$ver/doc
 cd /nsls2/software/ap/madx/$ver/bin

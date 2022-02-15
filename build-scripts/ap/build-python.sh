@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
-#ver=3.9.1
-ver=3.6.15
+ver=3.9.1
+#ver=3.6.15
 
 # Python $ver
 # Needs ncurses built correctly, a bit painful to figure out
@@ -20,4 +20,4 @@ cd /nsls2/software/ap/python/$ver/bin
 ln -s python3 python
 ln -s pip3 pip
 yes | LD_LIBRARY_PATH=/nsls2/software/ap/python/$ver/lib ./pip install pip -U
-yes | LD_LIBRARY_PATH=/nsls2/software/ap/python/$ver/lib ./pip install wheel numpy scipy matplotlib mpi4py Cython ipython jupyter ninja meson jupyterhub sudospawner PyQt5 argos
+yes | LD_LIBRARY_PATH=/nsls2/software/ap/python/$ver/lib ./pip install wheel numpy scipy matplotlib mpi4py Cython ipython jupyter ninja meson jupyterhub sudospawner sympy PyQt5 argos
