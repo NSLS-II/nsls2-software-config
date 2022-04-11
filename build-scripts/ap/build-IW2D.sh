@@ -41,7 +41,7 @@ make install
 
 mkdir -pv ${EXTLIBDIR}/ALGLIB
 cd ${EXTLIBDIR}/ALGLIB
-wget http://www.alglib.net/translator/re/alglib-2.6.0.mpfr.zip
+wget https://www.alglib.net/translator/re/alglib-2.6.0.mpfr.zip
 unzip alglib-2.6.0.mpfr.zip
 cd mpfr
 chmod +x build
