@@ -50,7 +50,9 @@ chmod +x build
 
 cd ${IDIR}
 unzip ~dhidas/software/IW2D_mirror-master.zip
-cd IW2D_mirror-master/ImpedanceWake2D
+mv IW2D_mirror-master IW2D
+cd IW2D/ImpedanceWake2D
+chmod -x *.cc
 cp Makefile_local_GMP_MPFR Makefile
 make -f Makefile \
   PATH_ALGLIB=${EXTLIBDIR}/ALGLIB/mpfr/out \
@@ -60,4 +62,4 @@ make -f Makefile \
   PATH_GMP_INC=${EXTLIBDIR}/include \
   PATH_MPFR_LIB=${EXTLIBDIR}/lib \
   PATH_MPFR_INC=${EXTLIBDIR}/include
-
+mv libIW2D.so ${EXTLIBDIR}/lib
