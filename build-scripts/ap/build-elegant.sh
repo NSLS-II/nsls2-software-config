@@ -2,14 +2,21 @@
 
 # Might be useful: https://www3.aps.anl.gov/forums/elegant/viewtopic.php?t=891
 
+#MPIF=mpich
+#MPIV=3.3.2
+MPIF=openmpi
+MPIV=3.1.6
+GCCV=9.3.0
+
 module purge
-module load accelerator/path gcc/9.3.0 mpich/3.3.2-gcc-9.3.0 python/3.9.1 motif/2.3.8 tcltk/8.6.11
+module load accelerator/path gcc/${GCCV} ${MPIF}/${MPIV}-gcc-${GCCV} python/3.9.1 motif/2.3.8 tcltk/8.6.11
 
 #export EV=2020.5.0
 #export EV=2021.2.0
 #export EV=2021.3.0
-export EV=2021.4.0
-export EBASE=/nsls2/software/ap/elegant/$EV-gcc-9.3.0-mpich-3.3.2
+#export EV=2021.4.0
+export EV=2022.1.0
+export EBASE=/nsls2/software/ap/elegant/$EV-gcc-${GCCV}-${MPIF}-${MPIV}
 export EBUILD=/nsls2/software/ap/elegant/build/$EV
 
 # Make build dir and download all needed files to it
