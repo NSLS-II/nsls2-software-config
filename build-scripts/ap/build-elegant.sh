@@ -2,10 +2,10 @@
 
 # Might be useful: https://www3.aps.anl.gov/forums/elegant/viewtopic.php?t=891
 
-#MPIF=mpich
-#MPIV=3.3.2
-MPIF=openmpi
-MPIV=3.1.6
+MPIF=mpich
+MPIV=3.3.2
+#MPIF=openmpi
+#MPIV=3.1.5
 GCCV=9.3.0
 
 module purge
@@ -15,24 +15,27 @@ module load accelerator/path gcc/${GCCV} ${MPIF}/${MPIV}-gcc-${GCCV} python/3.9.
 #export EV=2021.2.0
 #export EV=2021.3.0
 #export EV=2021.4.0
-export EV=2022.1.0
+#export EV=2022.1.0
+#export EV=2022.2.0
+#export EV=2023.1.0 SDDSV=5.3 SDDSEV=5.2 OAGV=1.27.1
+export EV=2023.2.0 SDDSV=5.4 SDDSEV=5.4 OAGV=1.28
 export EBASE=/nsls2/software/ap/elegant/$EV-gcc-${GCCV}-${MPIF}-${MPIV}
 export EBUILD=/nsls2/software/ap/elegant/build/$EV
 
 # Make build dir and download all needed files to it
 mkdir -pv $EBUILD
 cd $EBUILD
-wget https://epics.anl.gov/download/base/baseR3.14.12.8.tar.gz # https://epics.anl.gov/download/base/index.php
-wget https://ops.aps.anl.gov/downloads/elegant.${EV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
-wget https://epics.anl.gov/download/extensions/extensionsTop_20120904.tar.gz # https://epics.anl.gov/extensions/configure/index.php
-wget https://ops.aps.anl.gov/downloads/SDDS.5.1.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
-wget https://ops.aps.anl.gov/downloads/oag.apps.configure.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
-wget https://ops.aps.anl.gov/downloads/SDDSepics.5.1.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
-wget https://ops.aps.anl.gov/downloads/elegant.${EV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
-wget https://github.com/Reference-LAPACK/lapack/archive/v3.9.0.tar.gz # http://www.netlib.org/lapack/
-wget http://www.netlib.org/blas/blas-3.8.0.tgz # http://www.netlib.org/blas/
-wget https://ops.aps.anl.gov/downloads/oag.1.27.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
-wget https://ops.aps.anl.gov/downloads/defns.rpn # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
+wget --backups=1 https://epics.anl.gov/download/base/baseR3.14.12.8.tar.gz # https://epics.anl.gov/download/base/index.php
+wget --backups=1 https://ops.aps.anl.gov/downloads/elegant.${EV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
+wget --backups=1 https://epics.anl.gov/download/extensions/extensionsTop_20120904.tar.gz # https://epics.anl.gov/extensions/configure/index.php
+wget --backups=1 https://ops.aps.anl.gov/downloads/SDDS.${SDDSV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
+wget --backups=1 https://ops.aps.anl.gov/downloads/oag.apps.configure.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
+wget --backups=1 https://ops.aps.anl.gov/downloads/SDDSepics.${SDDSEV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
+wget --backups=1 https://ops.aps.anl.gov/downloads/elegant.${EV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
+wget --backups=1 https://github.com/Reference-LAPACK/lapack/archive/v3.9.0.tar.gz # http://www.netlib.org/lapack/
+wget --backups=1 --no-check-certificate http://www.netlib.org/blas/blas-3.8.0.tgz # http://www.netlib.org/blas/
+wget --backups=1 https://ops.aps.anl.gov/downloads/oag.${OAGV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
+wget --backups=1 https://ops.aps.anl.gov/downloads/defns.rpn # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 
 echo "done wget"
 
@@ -64,7 +67,7 @@ tar zxf $EBUILD/extensionsTop_20120904.tar.gz
 
 # Build SDDS
 cd $EBASE
-tar zxf $EBUILD/SDDS.5.1.tar.gz
+tar zxf $EBUILD/SDDS.${SDDSV}.tar.gz
 cd epics/extensions/configure
 make
 cd ../src/SDDS/tiff
@@ -82,25 +85,25 @@ echo "done SDDS"
 # OAG
 cd $EBASE
 tar zxf $EBUILD/oag.apps.configure.tar.gz
-tar zxf $EBUILD/SDDSepics.5.1.tar.gz
+tar zxf $EBUILD/SDDSepics.${SDDSEV}.tar.gz
 tar zxf $EBUILD/elegant.${EV}.tar.gz
 
-# LAPACK
-cd $EBASE
-tar zxf $EBUILD/v3.9.0.tar.gz
-cd lapack-3.9.0/
-cp make.inc.example make.inc
-make
-cp liblapack.a  librefblas.a  libtmglib.a ../epics/extensions/lib/linux-x86_64/
-echo "done LAPACK"
-
-# BLAS
-cd $EBASE
-tar zxf $EBUILD/blas-3.8.0.tgz
-cd BLAS-3.8.0/
-make
-cp blas_LINUX.a ../epics/extensions/lib/linux-x86_64/libblas.a
-echo "done BLAS"
+####### LAPACK
+######cd $EBASE
+######tar zxf $EBUILD/v3.9.0.tar.gz
+######cd lapack-3.9.0/
+######cp make.inc.example make.inc
+######make
+######cp liblapack.a  librefblas.a  libtmglib.a ../epics/extensions/lib/linux-x86_64/
+######echo "done LAPACK"
+######
+####### BLAS
+######cd $EBASE
+######tar zxf $EBUILD/blas-3.8.0.tgz
+######cd BLAS-3.8.0/
+######make
+######cp blas_LINUX.a ../epics/extensions/lib/linux-x86_64/libblas.a
+######echo "done BLAS"
 
 # OAG Apps
 cd $EBASE/oag/apps/configure
@@ -133,7 +136,7 @@ echo "done Pelegant"
 
 # OAG Tcl/Tk
 cd $EBASE
-tar zxf $EBUILD/oag.1.27.tar.gz
+tar zxf $EBUILD/oag.${OAGV}.tar.gz
 cd oag/apps/src/tcltklib
 make
 cd ../pem

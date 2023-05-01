@@ -1,3 +1,35 @@
+# Fluka 4-3.0
+# Download version locally and copy in from: https://fluka.cern/download/latest-fluka-release
+module purge
+module load accelerator/path gcc/9.3.0
+mkdir -pv /nsls2/software/ap/fluka/build
+# scp Downloads/fluka-4-3.0.x86-Linux-gfor9.tar dhidas@submit1:/nsls2/software/ap/fluka/build
+cd /nsls2/software/ap/fluka/build
+tar zxf fluka-4-3.0.x86-Linux-gfor9.tgz
+cd fluka4-3.0/src
+make
+cd ..
+wget --backups=1 https://flukafiles.web.cern.ch/flukafiles/neutron/fluka_pw_jeff-3.3-1.0.tgz
+wget --backups=1 https://flukafiles.web.cern.ch/flukafiles/neutron/fluka_pw_endf-viii0-1.0.tgz
+wget --backups=1 https://flukafiles.web.cern.ch/flukafiles/neutron/fluka_pw_jendl-4.0u-1.0.tgz
+wget --backups=1 https://flukafiles.web.cern.ch/flukafiles/neutron/fluka_pw_cendl-31-1.0.tgz
+wget --backups=1 https://flukafiles.web.cern.ch/flukafiles/neutron/fluka_pw_brond-3.1-1.0.tgz
+cd fluka4-3.0
+tar zxf ../fluka_pw_jeff-3.3-1.0.tgz
+tar zxf ../fluka_pw_endf-viii0-1.0.tgz
+tar zxf ../fluka_pw_jendl-4.0u-1.0.tgz
+tar zxf ../fluka_pw_cendl-31-1.0.tgz
+tar zxf ../fluka_pw_brond-3.1-1.0.tgz
+cd ../..
+chmod go+rx fluka4-3.0/bin/*
+chmod g+w fluka4-3.0/bin/*
+chmod -R go+r fluka4-3.0/data/*
+mv fluka4-3.0 ../4-3.0
+
+
+
+
+
 # Fluka 4-2.2
 # Download version locally and copy in from: https://fluka.cern/download/latest-fluka-release
 module purge

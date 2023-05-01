@@ -3,8 +3,8 @@
 # https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/installguide.html
 # https://github.com/Geant4/geant4/releases
 
-VER=10.7
-PAT=3
+VER=11.1
+PAT=0
 #printf -v PAT "p%02d" $PATN
 TAR=v${VER}.${PAT}.tar.gz
 
