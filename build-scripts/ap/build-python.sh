@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
-ver=3.9.1
+#ver=3.9.1  # Default
+ver=3.9.2
 #ver=3.6.15
 
 # Python $ver
