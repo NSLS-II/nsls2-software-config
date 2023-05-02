@@ -1,0 +1,12 @@
+.gcc
+.openmpi/mpich
+.python
+.nodejs
+.gsl
+.perl
+.tcltk
+.elegant
+.hdf5
+.fftw
+.genesis
+.matlab # using already installed for cluster versions

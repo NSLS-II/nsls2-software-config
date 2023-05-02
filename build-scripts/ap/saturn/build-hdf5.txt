@@ -1,0 +1,32 @@
+# hdf5
+
+# This build includes both parallel and java with an override (lookout!)
+
+source base-config.sh
+
+module purge
+
+SN=hdf5
+
+VER=1.12.2
+BDIR=${SW}/${SN}/build
+IDIR=${SW}/${SN}/${VER}
+
+MPIF=mpich
+MPIV=3.3.2
+GCCV=9.5.0
+
+module load gcc/${GCCV} ${MPIF}/${MPIV} python/3.9.13
+
+
+mkdir -pv ${BDIR}
+cd ${BDIR}
+# Download locally and copy: https://www.hdfgroup.org/downloads/hdf5/source-code/
+# scp Downloads/hdf5-1.12.2.tar dhidas@saturn:/home/software/hdf5/build
+tar xf hdf5-${VER}.tar
+cd hdf5-${VER}
+CC=`which mpicc` ./configure --enable-parallel --enable-shared --prefix=${IDIR} --enable-java --enable-unsupported
+
+make -j > m.o
+make install
+

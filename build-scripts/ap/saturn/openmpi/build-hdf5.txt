@@ -1,0 +1,34 @@
+# hdf5
+
+# This build includes both parallel and java with an override (lookout!)
+
+
+module purge
+module prepend-path MODULEPATH /nsls2/software/ap/saturn/modulefiles
+
+SW=/nsls2/software/ap/saturn
+SN=hdf5
+
+VER=1.12.2
+BDIR=${SW}/${SN}/build
+IDIR=${SW}/${SN}/${VER}
+
+MPIF=openmpi
+MPIV=4.1.4
+GCCV=9.5.0
+
+module purge
+module load gcc/${GCCV} ${MPIF}/${MPIV}-gcc-${GCCV} python/3.9.13
+
+
+mkdir -pv ${BDIR}
+cd ${BDIR}
+# Download locally and copy: https://www.hdfgroup.org/downloads/hdf5/source-code/
+# scp Downloads/hdf5-1.12.2.tar dhidas@saturn:/nsls2/software/ap/saturn/hdf5/build
+tar xf hdf5-${VER}.tar
+cd hdf5-${VER}
+CC=`which mpicc` ./configure --enable-parallel --enable-shared --prefix=${IDIR} --enable-java --enable-unsupported
+
+make -j > m.o
+make install
+

@@ -1,0 +1,16 @@
+# grabbing and installing on saturn requires (so far) an ssh-tunnel for socks5 proxy
+
+# login to saturn and send a port back to austin
+ssh -D 9999 austin
+
+# example of curl (wget will not work, so sub as needed)
+curl -x socks5h://0:9999 -O http://mirrors.concertpass.com/gcc/releases/gcc-9.5.0/gcc-9.5.0.tar.gz
+
+# pip will work with a socks5 proxy
+pip3 install --proxy='socks5://localhost:9999' matplotlib –user
+
+
+
+http_proxy=https://relay.nsls2.bnl.local:3128
+https_proxy=https://relay.nsls2.bnl.local:3128
+
