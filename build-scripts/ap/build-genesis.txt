@@ -3,12 +3,14 @@ module load accelerator/path gcc/9.3.0 python/3.9.1 mpich/3.3.2-gcc-9.3.0 hdf5/1
 mkdir -pv /nsls2/software/ap/genesis/build
 cd /nsls2/software/ap/genesis/build
 git clone https://github.com/dhidas/Genesis-1.3-Version4.git
+cd Genesis-1.3-Version4/
 # modify line 36 src/IO/Output.cpp: H5Oget_info(objects[i], &info, NULL);
 make
-make install
-grep  "int version" src/Main/GenMain.cpp # to find version
-mkdir -pv /nsls2/software/ap/genesis/4.4.0
-cp -r bin lib include benchmark manual  postprocessor sdds2hdf xgenesis /nsls2/software/ap/genesis/4.4.0/
+#make install
+#grep  "int version" src/Main/GenMain.cpp # to find version
+mkdir -pv /nsls2/software/ap/genesis/4.5.1/bin
+cp gencore /nsls2/software/ap/genesis/4.5.1/bin/genesis4
+cp -r lib include benchmark manual  postprocessor sdds2hdf xgenesis /nsls2/software/ap/genesis/4.5.1/
 
 
 

@@ -35,6 +35,7 @@ $fetch https://github.com/Reference-LAPACK/lapack/archive/refs/tags/v3.9.0.tar.g
 $fetch -k http://www.netlib.org/blas/blas-3.8.0.tgz # http://www.netlib.org/blas/
 $fetch https://ops.aps.anl.gov/downloads/oag.${OAGV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 $fetch https://ops.aps.anl.gov/downloads/defns.rpn # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
+$fetch https://ops.aps.anl.gov/downloads/elegantExamples.tar.gz
 
 echo "done wget"
 
@@ -178,6 +179,11 @@ cp $EBUILD/defns.rpn $EBASE
 cd $EBASE/oag/apps/bin/linux-x86_64
 ln -s ${TCL_BIN}/tclsh oagtclsh
 ln -s ${TCL_BIN}/wish oagwish
+
+
+# copy examples
+cd $EBASE
+tar zxf $EBUILD/elegantExamples.tar.gz
 
 
 echo "done"
