@@ -18,7 +18,8 @@ module load accelerator/path gcc/${GCCV} ${MPIF}/${MPIV}-gcc-${GCCV} python/3.9.
 #export EV=2022.1.0
 #export EV=2022.2.0
 #export EV=2023.1.0 SDDSV=5.3 SDDSEV=5.2 OAGV=1.27.1
-export EV=2023.2.0 SDDSV=5.4 SDDSEV=5.4 OAGV=1.28
+#export EV=2023.2.0 SDDSV=5.4 SDDSEV=5.4 OAGV=1.28
+export EV=2023.3.0 SDDSV=5.5 SDDSEV=5.4 OAGV=1.28
 export EBASE=/nsls2/software/ap/elegant/$EV-gcc-${GCCV}-${MPIF}-${MPIV}
 export EBUILD=/nsls2/software/ap/elegant/build/$EV
 
