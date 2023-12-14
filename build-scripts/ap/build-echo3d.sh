@@ -19,7 +19,7 @@ else
   unzip ${NAME}.zip
 fi
 
-VER=`echo '' | ./${NAME}/Codes/Linux/ECHO3D | head -1 | grep -oP 'ver \K\d+.\d+.\d+'`
+VER=`echo '' | ./${NAME}/Codes/Linux_Intel/ECHO3D | head -1 | grep -oP 'ver \K\d+.\d+.\d+'`
 echo "installing version ${VER}"
 mv ${NAME} /nsls2/software/ap/echo3d/${VER}
 rm -rf __MACOSX
