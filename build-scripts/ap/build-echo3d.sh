@@ -23,3 +23,5 @@ VER=`echo '' | ./${NAME}/Codes/Linux_Intel/ECHO3D | head -1 | grep -oP 'ver \K\d
 echo "installing version ${VER}"
 mv ${NAME} /nsls2/software/ap/echo3d/${VER}
 rm -rf __MACOSX
+
+echo "WARNING: Permissions here are usually a mess so check them in detail before deploying."

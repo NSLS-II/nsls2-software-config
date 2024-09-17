@@ -4,7 +4,8 @@ source base-config.sh
 
 module purge
 
-VER=3.11.1 # Default version
+#VER=3.11.1 # Default version
+VER=3.12.1
 #VER=3.9.1
 #VER=3.9.16
 GCCV=10.4.0

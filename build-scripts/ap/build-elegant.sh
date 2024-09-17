@@ -21,21 +21,21 @@ module load accelerator/path gcc/${GCCV} ${MPIF}/${MPIV}-gcc-${GCCV} python/3.9.
 #export EV=2023.2.0 SDDSV=5.4 SDDSEV=5.4 OAGV=1.28
 #export EV=2023.3.0 SDDSV=5.5 SDDSEV=5.4 OAGV=1.28
 export EV=2023.4.0 SDDSV=5.6 SDDSEV=5.6 OAGV=1.28
-export EBASE=/nsls2/software/ap/elegant/$EV-gcc-${GCCV}-${MPIF}-${MPIV}
+export EBASE=/nsls2/software/ap/elegant/$EV-gcc-${GCCV}-${MPIF}-${MPIV}_2
 export EBUILD=/nsls2/software/ap/elegant/build/$EV
 
 # Make build dir and download all needed files to it
 mkdir -pv $EBUILD
 cd $EBUILD
-wget --backups=1 https://epics.anl.gov/download/base/baseR3.14.12.8.tar.gz # https://epics.anl.gov/download/base/index.php
+wget --no-check-certificate --backups=1 https://epics.anl.gov/download/base/baseR3.14.12.8.tar.gz # https://epics.anl.gov/download/base/index.php
 wget --backups=1 https://ops.aps.anl.gov/downloads/elegant.${EV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
-wget --backups=1 https://epics.anl.gov/download/extensions/extensionsTop_20120904.tar.gz # https://epics.anl.gov/extensions/configure/index.php
+wget --no-check-certificate --backups=1 https://epics.anl.gov/download/extensions/extensionsTop_20120904.tar.gz # https://epics.anl.gov/extensions/configure/index.php
 wget --backups=1 https://ops.aps.anl.gov/downloads/SDDS.${SDDSV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 wget --backups=1 https://ops.aps.anl.gov/downloads/oag.apps.configure.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 wget --backups=1 https://ops.aps.anl.gov/downloads/SDDSepics.${SDDSEV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 wget --backups=1 https://ops.aps.anl.gov/downloads/elegant.${EV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
-wget --backups=1 https://github.com/Reference-LAPACK/lapack/archive/v3.9.0.tar.gz # http://www.netlib.org/lapack/
-wget --backups=1 --no-check-certificate http://www.netlib.org/blas/blas-3.8.0.tgz # http://www.netlib.org/blas/
+#wget --backups=1 https://github.com/Reference-LAPACK/lapack/archive/v3.9.0.tar.gz # http://www.netlib.org/lapack/
+#wget --backups=1 --no-check-certificate http://www.netlib.org/blas/blas-3.8.0.tgz # http://www.netlib.org/blas/
 wget --backups=1 https://ops.aps.anl.gov/downloads/oag.${OAGV}.tar.gz # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 wget --backups=1 https://ops.aps.anl.gov/downloads/defns.rpn # https://www.aps.anl.gov/Accelerator-Operations-Physics/Software
 

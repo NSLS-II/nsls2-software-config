@@ -9,7 +9,9 @@ module load accelerator/path gcc/9.3.0 python/3.9.1 cmake/3.19.3 ncurses/6.2
 
 
 # new setup from github
-ver=20231010-0
+#ver=20231010-0
+ver=20231221-0
+ver=20231223-0
 
 
 
@@ -22,7 +24,8 @@ cd bmad_dist_${ver}
 export DIST_BASE_DIR=`pwd`
 #export ACC_ROOT_DIR=`pwd`
 ### edit util/dist_source_me, add echo hi in last line of func: func_echo_fortran
-source ${DIST_BASE_DIR}/util/dist_source_me
+source ${DIST_BASE_DIR}/util/dist_source_me || echo asdasd
+echo "after sourceme 0"
 ulimit -S -c 0
 ulimit -S -s 10240 # Remove this line when using a Mac
 ulimit -d unlimited
@@ -50,12 +53,19 @@ export ACC_USE_MACPORTS="N"
 EOF
 echo "moving along"
 
-source ${DIST_BASE_DIR}/util/dist_source_me
+source ${DIST_BASE_DIR}/util/dist_source_me || echo asdasd
+echo "after sourceme 1"
 #export DIST_UTIL=`pwd`/util
 ./util/dist_build_production
+echo "after build production"
+source ${DIST_BASE_DIR}/util/dist_source_me || echo asdasd
 ./util/dist_build_debug
+echo "after build debug"
 
 cd $DIST_BASE_DIR
+source ${DIST_BASE_DIR}/util/dist_source_me || echo asdasd
 git clone https://github.com/bmad-sim/pytao.git
 cd pytao
 python setup.py install --prefix=$DIST_BASE_DIR/tao/python
+
+echo "done"
